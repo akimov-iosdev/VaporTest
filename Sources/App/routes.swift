@@ -20,7 +20,14 @@ func routes(_ app: Application) throws {
         return "Hello Vapor!"
     }
 
-    app.post("info") { (req) -> InfoResponse in
+    app.post("info") { (req) -> InfoData in
+        let data = try req.content.decode(InfoData.self)
+//        return "Hello \(data.name)!"
+//        return InfoResponse(request: data)
+        return data
+    }
+    
+    app.post("infotest") { (req) -> InfoResponse in
         let data = try req.content.decode(InfoData.self)
 //        return "Hello \(data.name)!"
         return InfoResponse(request: data)
